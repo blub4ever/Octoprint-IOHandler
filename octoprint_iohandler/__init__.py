@@ -293,8 +293,8 @@ class PauseSwitch(SwitchLEDHodler):
         SwitchLEDHodler.__init__(self, parent, buttonName, buttonPin, inverted, self.buttonClicked, ledPin, isActive, [], False, True)
 
     def toogleState(self, force=None):
-        if self.parent._printer.is_printing():
-            super(SwitchLEDHodler, self).toogleState()
+        if self.parent._printer.is_printing() or force != None:
+            SwitchLEDHodler.toogleState(self,force)
         else:
             self.parent._logger.info("Button \"%s:%s\" do not change state, not printing" % (self.buttonName, self.buttonPin))
 
